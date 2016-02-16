@@ -18,10 +18,6 @@ if [ -d "$lbrynet_directory" ]; then
 	fi
 fi
 
-if which stop-lbrynet-daemon &>/dev/null; then
-	daemon_stat=$(stop-lbrynet-daemon)
-fi
-
 tmp=$(mktemp -d)
 cd $tmp
 
@@ -40,7 +36,3 @@ echo "Cleaning up"
 
 cd ../../
 sudo rm -rf $tmp
-
-if [[ $daemon_stat = "LBRYnet daemon stopped" ]] &>/dev/null; then
-	sudo lbrynet-daemon
-fi
