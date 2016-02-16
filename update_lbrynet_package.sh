@@ -21,13 +21,13 @@ fi
 tmp=$(mktemp -d)
 cd $tmp
 
-echo "Downloading newest version of lbrynet"
+echo "Downloading update"
 
 git clone https://github.com/lbryio/lbry.git &>/dev/null
 cd lbry
 
 version=$(git rev-parse HEAD)
-echo "Installing lbrynet"
+echo "Updating lbrynet"
 sudo python setup.py install &>/dev/null
 mkdir -p "$lbrynet_directory"
 echo $version > "${lbrynet_directory}/version.txt"
@@ -36,3 +36,6 @@ echo "Cleaning up"
 
 cd ../../
 sudo rm -rf $tmp
+
+echo "Restarting lbrynet-daemon"
+sudo lbrynet-daemon
